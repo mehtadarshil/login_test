@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
-  res.send('Hello World!');
+  res.send('तुम बड़े मूर्ख हो');
 });
 
 app.get('/getAllUsers', userController.getAllUser);
