@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
-  res.sendFile('/home/pc176/nodejs_projects/login_test/test.html');
+  res.sendFile('test.html',{ root: '.' });
 });
 
 app.get('/getAllUsers', userController.getAllUser);
