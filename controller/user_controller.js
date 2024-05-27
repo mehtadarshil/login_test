@@ -5,16 +5,6 @@ var bcrypt = require('bcrypt');
 const supabase = createClient('https://glgstqzzgsphcuiroyzd.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdsZ3N0cXp6Z3NwaGN1aXJveXpkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTY0NjQwMDYsImV4cCI6MjAzMjA0MDAwNn0.b1Yq43LmjknZig-1N7Zdi1WZonBFQIONUMlNWKSyhGk')
 
 
-// async function getAllUser(res) {
-//     const { data, error } = await supabase.from("users").select('*');
-    
-//     if (error) {
-//       console.error('Error fetching data:', error);
-//       return;
-//     }
-//     res.send(data);
-//     console.log('Fetched data:', data);
-//   }
 
   const   getAllUser = async (req, res) => {
     try {
@@ -82,20 +72,36 @@ const supabase = createClient('https://glgstqzzgsphcuiroyzd.supabase.co', 'eyJhb
 
   const   loginUser = async (req, res) => {
     try {
-      const {user_name,password} = req.body;
+      // if (!req.body) {
+      //   res.status(500).json({
+      //     "statuscode":500,
+      //     "message":"user_name & password are requied"
+      //   });
+      // } else if(!req.body.user_name){
+      //   res.status(500).json({
+      //     "statuscode":500,
+      //     "message":"user_name is requied"
+      //   });
+      // }else if(!req.body.password){
+      //   res.status(500).json({
+      //     "statuscode":500,
+      //     "message":"password is requied"
+      //   });
+      // }else{
+        const {user_name,password} = req.body;
         const { data, error1 } = await supabase.schema("public").from("users").select("*").eq("user_name",user_name);
       if (error1) {
         res.json({"statuscode":500,"message":"Something went wrong"});
       } else {
         if (data.length===0) {
-          res.json({
+          res.status(404).json({
             "statuscode":404,
             "message":"User Not Found"
           });
         } else {
           bcrypt.compare(password, data[0]["password"], (err, result) => {
             if (err) {
-              res.json({"statuscode":500,"message":"Comparing Password failed"});
+              res.status(500).json({"statuscode":500,"message":"Comparing Password failed"});
             }
 
             if (result) {
@@ -105,7 +111,7 @@ const supabase = createClient('https://glgstqzzgsphcuiroyzd.supabase.co', 'eyJhb
                 "message":"User fetched successfully"
               });
             } else {
-              res.json({
+              res.status(400).json({
                 "statuscode":400,
                 "message":"Incorrent Password"
               });
@@ -113,6 +119,8 @@ const supabase = createClient('https://glgstqzzgsphcuiroyzd.supabase.co', 'eyJhb
         });
         }
       }
+      // }
+      
     } catch (error) {
         console.log("error" ,error );
       res.status(500).send("Internal Server Error");

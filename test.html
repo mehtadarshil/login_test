@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TNF</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #000000, #161102);
+            color: white;
+            text-align: center;
+            overflow-x: hidden;
+        }
+        h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 4em;
+            margin: 20px 0;
+            animation: fadeIn 2s ease-in-out, moveUp 2s ease-in-out;
+        }
+        .content-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width: 1200px;
+            padding: 20px;
+            box-sizing: border-box;
+            margin: 0 auto;
+        }
+        .content-box {
+            background: linear-gradient(135deg, #000000, #161102);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 2px 15px rgba(61, 60, 60, 0.5);
+            animation: fadeIn 2s ease-in-out, moveUp 2s ease-in-out;
+        }
+        p {
+            font-size: 1.2em;
+            margin: 0;
+        }
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+        @keyframes moveUp {
+            0% {
+                transform: translateY(50px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3em;
+            }
+            p {
+                font-size: 1em;
+            }
+            .content-box {
+                padding: 15px;
+            }
+        }
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2em;
+            }
+            p {
+                font-size: 0.9em;
+            }
+            .content-box {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to TechNoFear</h1>
+    <div class="content-container">
+        <div class="content-box">
+            <p><strong>Web Development</strong></p>
+            <p>Creating stunning and responsive websites tailored to your business needs.</p>
+        </div>
+        <div class="content-box">
+            <p><strong>Mobile App Development</strong></p>
+            <p>Building user-friendly mobile applications for both Android and iOS platforms.</p>
+        </div>
+        <div class="content-box">
+            <p><strong>Software Solutions</strong></p>
+            <p>Delivering custom software solutions to streamline your business processes.</p>
+        </div>
+        <div class="content-box">
+            <p><strong>IT Consulting</strong></p>
+            <p>Providing expert IT consulting services to help your business leverage technology effectively.</p>
+        </div>
+    </div>
+</body>
+</html>

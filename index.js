@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
-  res.send('तुम बड़े मूर्ख हो');
+  res.sendFile('/home/pc176/nodejs_projects/login_test/test.html');
 });
 
 app.get('/getAllUsers', userController.getAllUser);
