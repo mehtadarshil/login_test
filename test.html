@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TNF</title>
+    <title>TechNoFear</title>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
     <style>
         body, html {
-            height: 100%;
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
@@ -36,9 +35,16 @@
             background: linear-gradient(135deg, #000000, #161102);
             padding: 20px;
             border-radius: 15px;
-            box-shadow: 0 2px 15px rgba(61, 60, 60, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
             animation: fadeIn 2s ease-in-out, moveUp 2s ease-in-out;
         }
+
+        .content-box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+        }
+
         p {
             font-size: 1.2em;
             margin: 0;
@@ -59,6 +65,32 @@
                 transform: translateY(0);
             }
         }
+        .portfolio-container {
+            width: 100%;
+            max-width: 1200px;
+            padding: 20px;
+            box-sizing: border-box;
+            margin: 0 auto;
+        }
+        .portfolio-item {
+            background: linear-gradient(135deg, #000000, #161102);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 20px;
+            animation: fadeIn 2s ease-in-out, moveUp 2s ease-in-out;
+        }
+        .portfolio-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+        }
+        .portfolio-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3em;
+            margin: 40px 0 20px;
+            animation: fadeIn 2s ease-in-out, moveUp 2s ease-in-out;
+        }
         /* Responsive styles */
         @media (max-width: 768px) {
             h1 {
@@ -70,6 +102,9 @@
             .content-box {
                 padding: 15px;
             }
+            .portfolio-title {
+                font-size: 2.5em;
+            }
         }
         @media (max-width: 480px) {
             h1 {
@@ -80,6 +115,9 @@
             }
             .content-box {
                 padding: 10px;
+            }
+            .portfolio-title {
+                font-size: 2em;
             }
         }
     </style>
@@ -102,6 +140,26 @@
         <div class="content-box">
             <p><strong>IT Consulting</strong></p>
             <p>Providing expert IT consulting services to help your business leverage technology effectively.</p>
+        </div>
+    </div>
+
+    <div class="portfolio-container">
+        <h2 class="portfolio-title">Our Portfolio</h2>
+        <div class="portfolio-item">
+            <p><strong>Project 1</strong></p>
+            <p>Details about Project 1. A comprehensive overview of what was accomplished.</p>
+        </div>
+        <div class="portfolio-item">
+            <p><strong>Project 2</strong></p>
+            <p>Details about Project 2. A comprehensive overview of what was accomplished.</p>
+        </div>
+        <div class="portfolio-item">
+            <p><strong>Project 3</strong></p>
+            <p>Details about Project 3. A comprehensive overview of what was accomplished.</p>
+        </div>
+        <div class="portfolio-item">
+            <p><strong>Project 4</strong></p>
+            <p>Details about Project 4. A comprehensive overview of what was accomplished.</p>
         </div>
     </div>
 </body>

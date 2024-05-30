@@ -69,25 +69,97 @@ const supabase = createClient('https://glgstqzzgsphcuiroyzd.supabase.co', 'eyJhb
     }
   };
 
+  const getTodoList = async (req,res)=>{
+    try {
+      if (!req.body.userid) {
+        res.status(500).json({
+          "statuscode":500,
+          "message":"userid is requied"
+        });
+      }else{
+        const {userid} = req.body;
+        const { data, error1 } = await supabase.schema("public").from("todo").select("*").eq("userId",userid);
+        if (error1) {
+          res.json({"statuscode":500,"message":"Something went wrong"});
+        }else{
+          if (data.length===0) {
+            res.status(404).json({
+              "statuscode":404,
+              "message":"Todo Not Found",
+              "data":[]
+            });
+          }else{
+            res.status(200).json({
+              "statuscode":200,
+              "message":"Todo fetched successfully",
+              "data":data
+            });
+          }
+        }
+      }
+    } catch (error) {
+      console.log("error" ,error );
+      res.status(500).send("Internal Server Error");
+    }
+  }
+
+  const insertTodoList = async (req,res)=>{
+    try {
+      if (!req.body.userid) {
+        res.status(500).json({
+          "statuscode":500,
+          "message":"userid is requied"
+        });
+      }
+      else if(!req.body.task){
+        res.status(500).json({
+          "statuscode":500,
+          "message":"task is requied"
+        });
+      }
+      else{
+        const {userid,task} = req.body;
+        const { data, error1 } = await supabase.schema("public").from("todo").insert({
+          "task":task,
+          "userId":userid
+        });
+        if (error1) {
+          res.json({"statuscode":500,"message":"Something went wrong"});
+        }else{
+          
+            res.status(200).json({
+              "statuscode":200,
+              "message":"Todo added successfully",
+            });
+          
+        }
+      }
+    } catch (error) {
+      console.log("error" ,error );
+      res.status(500).send("Internal Server Error");
+    }
+  }
+
 
   const   loginUser = async (req, res) => {
     try {
-      // if (!req.body) {
-      //   res.status(500).json({
-      //     "statuscode":500,
-      //     "message":"user_name & password are requied"
-      //   });
-      // } else if(!req.body.user_name){
-      //   res.status(500).json({
-      //     "statuscode":500,
-      //     "message":"user_name is requied"
-      //   });
-      // }else if(!req.body.password){
-      //   res.status(500).json({
-      //     "statuscode":500,
-      //     "message":"password is requied"
-      //   });
-      // }else{
+      
+      if (!req.body.user_name && !req.body.password) {
+        res.status(500).json({
+          "statuscode":500,
+          "message":"user_name & password are requied"
+        });
+      } else if(!req.body.user_name){
+        res.status(500).json({
+          "statuscode":500,
+          "message":"user_name is requied"
+        });
+      }else if(!req.body.password){
+        res.status(500).json({
+          "statuscode":500,
+          "message":"password is requied"
+        });
+      }else{
         const {user_name,password} = req.body;
         const { data, error1 } = await supabase.schema("public").from("users").select("*").eq("user_name",user_name);
       if (error1) {
@@ -117,9 +189,9 @@ const supabase = createClient('https://glgstqzzgsphcuiroyzd.supabase.co', 'eyJhb
               });
             }
         });
-        }
+        } 
       }
-      // }
+      }
       
     } catch (error) {
         console.log("error" ,error );
@@ -127,4 +199,4 @@ const supabase = createClient('https://glgstqzzgsphcuiroyzd.supabase.co', 'eyJhb
     }
   };
 
-  module.exports = { getAllUser,insertUser,loginUser}; 
+  module.exports = { getAllUser,insertUser,loginUser,getTodoList,insertTodoList}; 

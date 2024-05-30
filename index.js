@@ -3,7 +3,7 @@ const userController = require('./controller/user_controller.js');
 const app = express();
 var bodyParser = require('body-parser');
 const path = require('path');
-const port = 9000;
+const port = 3000;
 
 app.use(bodyParser.urlencoded({
   extended: true
@@ -24,8 +24,12 @@ app.post('/register', userController.insertUser);
 
 app.post('/login', userController.loginUser);
 
+app.post('/getTodoList', userController.getTodoList);
+
+app.post('/addTodo', userController.insertTodoList);
+
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+  console.log(`App listening at http://localhost:${port}`);
 });
 
 module.exports = app;
