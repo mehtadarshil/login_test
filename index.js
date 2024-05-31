@@ -30,7 +30,7 @@ app.post('/addTodo', userController.insertTodoList);
 
 app.post('/updateTodo', userController.updateTodo);
 
-app.post('/deleteTodo', userController.deleteTodo);
+app.delete('/deleteTodo', userController.deleteTodo);
 
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`);
