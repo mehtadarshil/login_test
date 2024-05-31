@@ -103,6 +103,33 @@ const supabase = createClient('https://glgstqzzgsphcuiroyzd.supabase.co', 'eyJhb
     }
   }
 
+  const deleteTodo = async (req,res)=>{
+    try {
+      if (!req.body.id && !(req.body.id===0)) {
+        res.status(500).json({
+          "statuscode":500,
+          "message":"id is requied"
+        });
+      }else{
+        const {id} = req.body;
+        const {error1 } = await supabase.schema("public").from("todo").delete().eq("id",id);
+        if (error1) {
+          res.json({"statuscode":500,"message":"Something went wrong"});
+        }else{
+          
+            res.status(200).json({
+              "statuscode":200,
+              "message":"Todo deleted successfully"
+            });
+          
+        }
+      }
+    } catch (error) {
+      console.log("error" ,error );
+      res.status(500).send("Internal Server Error");
+    }
+  }
+
   const insertTodoList = async (req,res)=>{
     try {
       if (!req.body.userid) {
@@ -130,6 +157,48 @@ const supabase = createClient('https://glgstqzzgsphcuiroyzd.supabase.co', 'eyJhb
             res.status(200).json({
               "statuscode":200,
               "message":"Todo added successfully",
+            });
+          
+        }
+      }
+    } catch (error) {
+      console.log("error" ,error );
+      res.status(500).send("Internal Server Error");
+    }
+  }
+
+  const updateTodo = async (req,res)=>{
+    try {
+      if (!req.body.isDone && !(req.body.isDone===false)) {
+        res.status(500).json({
+          "statuscode":500,
+          "message":"isDone is requied"
+        });
+      }
+      else if(!req.body.task){
+        res.status(500).json({
+          "statuscode":500,
+          "message":"task is requied"
+        });
+      }else if(!req.body.id){
+        res.status(500).json({
+          "statuscode":500,
+          "message":"id is requied"
+        });
+      }
+      else{
+        const {id,task,isDone} = req.body;
+        const { data, error1 } = await supabase.schema("public").from("todo").update({
+          "task":task,
+          "isDone":isDone
+        }).eq("id",id);
+        if (error1) {
+          res.json({"statuscode":500,"message":"Something went wrong"});
+        }else{
+          
+            res.status(200).json({
+              "statuscode":200,
+              "message":"Todo updated successfully",
             });
           
         }
@@ -199,4 +268,4 @@ const supabase = createClient('https://glgstqzzgsphcuiroyzd.supabase.co', 'eyJhb
     }
   };
 
-  module.exports = { getAllUser,insertUser,loginUser,getTodoList,insertTodoList}; 
+  module.exports = { getAllUser,insertUser,loginUser,getTodoList,insertTodoList,updateTodo,deleteTodo}; 

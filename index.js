@@ -28,6 +28,10 @@ app.post('/getTodoList', userController.getTodoList);
 
 app.post('/addTodo', userController.insertTodoList);
 
+app.post('/updateTodo', userController.updateTodo);
+
+app.post('/deleteTodo', userController.deleteTodo);
+
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`);
 });
