@@ -6,25 +6,6 @@ const supabase = createClient('https://glgstqzzgsphcuiroyzd.supabase.co', 'eyJhb
 
 
 
-const getAllUser = async (req, res) => {
-  try {
-    const { data, error1 } = await supabase.schema("public").from("users").select("*");
-    if (error1) {
-      res.json({ "status": 500 });
-    } else {
-      res.json({
-        "statuscode": 200,
-        "data": data,
-        "message": "All User fetched successfully"
-      });
-    }
-  } catch (error) {
-    console.log("error", error);
-    res.status(500).send("Internal Server Error");
-  }
-};
-
-
 const insertUser = async (req, res) => {
   try {
     const { user_name, password } = req.body;
@@ -274,4 +255,4 @@ const loginUser = async (req, res) => {
   }
 };
 
-module.exports = { getAllUser, insertUser, loginUser, getTodoList, insertTodoList, updateTodo, deleteTodo }; 
+module.exports = { insertUser, loginUser, getTodoList, insertTodoList, updateTodo, deleteTodo }; 

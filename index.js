@@ -11,15 +11,15 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 const filePath = path.join(__dirname, 'test.html');
 app.get('/', (req, res) => {
-  res.sendFile(filePath,(err) => {
+  res.sendFile(filePath, (err) => {
     if (err) {
       console.error('Error sending file:', err);
       // Send an error response if the file cannot be sent
       return res.status(500).send('Internal Server Error');
-    }});
+    }
+  });
 });
 
-app.get('/getAllUsers', userController.getAllUser);
 app.post('/register', userController.insertUser);
 
 app.post('/login', userController.loginUser);
