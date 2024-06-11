@@ -61,7 +61,7 @@ const getTodoList = async (req, res) => {
       });
     } else {
       const { userid } = req.body;
-      const { data, error1 } = await supabase.schema("public").from("todo").select("*").eq("userId", userid);
+      const { data, error1 } = await supabase.schema("public").from("todo").select("*").eq("userId", userid).order("created_at", { ascending: false });
       if (error1) {
         res.json({ "statuscode": 500, "message": "Something went wrong" });
       } else {
